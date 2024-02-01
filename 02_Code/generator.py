@@ -20,6 +20,11 @@ import string
 import json
 import time
 
+project_id = 'active-road-412714'
+topic_name = 'entregable'
+i_coord = (-73.9712,40.76847)
+f_coord = (-73.96668,40.76651)
+
 #Input arguments
 parser = argparse.ArgumentParser(description=('Vehicle Data Generator'))
 
@@ -44,6 +49,8 @@ args, opts = parser.parse_known_args()
 
 """ Helpful Code """
 
+#copiar y pegar abajo en la linea 153
+#en el topic siempre tienen que estar los mensajes codificados
 class PubSubMessages:
 
     """ Publish Messages in our PubSub Topic """
@@ -129,7 +136,7 @@ def getVehicleLocation(i_coord: tuple, f_coord: tuple, points: int):
 
 
 def vehicleData(project_id: str, topic_name: str, i_coord: tuple, f_coord: tuple):
-
+    
     """ This method will provide all the data that our device will generate.
     Params:
         i_coord (tuple): Lat,lon of the initial point of the section.
@@ -149,7 +156,7 @@ def vehicleData(project_id: str, topic_name: str, i_coord: tuple, f_coord: tuple
     # Get Vehicle Location
     coordinates: list = getVehicleLocation(
         i_coord=i_coord,f_coord=f_coord, points=10)
-
+#debemos poner nosotros las coordenadas que quereamos
     # Vehicle Payload
     try:
 
@@ -172,7 +179,6 @@ def vehicleData(project_id: str, topic_name: str, i_coord: tuple, f_coord: tuple
 
     except Exception as err:
         logging.error("Error while inserting data into the PubSub Topic: %s", err)
-
 
 def run_generator(project_id: str, topic_name: str, i_coord: tuple, f_coord:tuple):
 

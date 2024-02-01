@@ -236,7 +236,7 @@ def run():
         )
 
         """ Part 02: Get the aggregated data of the vehicle within the section. """
-
+#
         processed_data = (
             
             data 
